@@ -1,0 +1,8 @@
+.DS_Store
+.venv/
+__pycache__/
+*.pyc
+data/raw/
+results/
+logs/
+report/figures/

@@ -1,0 +1,226 @@
+﻿prompt,task,human_task
+"esp-wroom-32 code to use all 9 features of the gy-80 module. these are the following components. be sure to use any known libraries to keep the code as short as possible (adafruit unified sensor lib might work). All the values output to the serial as a space separated array. these are the following components L3G4200D 3-axis gyroscope, ADXL345 3-axis accelerometer, MC5883L 3-axis magnetometer(heading in degrees, altitude, x, y), BMP085 barometer – thermometer, I2C interface. Include some sort of way to calibrate the sensors in the code. Finally, append a timestamp via wifi for accurate time. When you write the code, start as you want to finish. The sensors need to be read continously via the serial port with putty.",coding,coding
+"In React components are coupled via lifting state up, and adding inverse data flow. What's the name of this principle, pattern?",coding,coding
+"what stands out the most about this book. Why might a reader want to buy it? What is implied by Mental Paraside, ROYA, and Hidden Currents?
+
+book blurb:
+Two things are stopping you from manifesting the realities of your biggest dream’s. The dangerous mindsets and programs that you’ve allowed to get written to your memory since you were a kid. Second, you. Are you ready to debug and declutter your mind, unlocking paradises of your own mental Zen? Join author Phil J. Bailey on a kaleidoscopic ride. A once secret, back-to-basics 9-step guide that he almost lost the courage, until now, to write. In this unconventional work of creative nonfiction, Bailey blends art, science, and personal philosophy to offer a refreshingly unique perspective on mental health and well-being. Drawing inspiration from Feng Shui, numerology, and angel numbers, he unveils the hidden currents of esoteric knowledge that society has often withheld. Amidst unchartered waters, both rocky and smooth, through repetition and iteration, every day, a new you. With wit and wisdom, you’re led through an exploration of the mind, expanding your understanding of self in the nick of time. Get butt-ass naked along this journey to the core of who you are, figuratively of course, unless you’re in Portland. Through each twist and turn, you’ll uncover epiphanies, make connections that transcend conventional storytelling, and savor the taste of knowledge. Delving into the realm of Python’s human-readable syntax and edible algorithms, Bailey presents a creative method that brings the logic of our lives to life. More than a collection of stories—this book is a symphony of narratives that invites you to read-your-own-adventure (RYOA). Follow the author’s sequence or if you dare: roll divinity dice, unlocking trillions of distinct ways, where no two readers’ paths reprise. Your own unique algorithmic recipe, to be kept secret for the sake of your Mental Alchemy. While the world around is ending, you’ll race to manifest a beautifully weird one of your own, that is finally beginning. Supported by the fortifying power of your inner child and (BYOU) unicorn superpowers, alone, you are not. Continue reading in the preface, because time is of the essence. (cliche, but true)",coding,qa_other
+"Write a c++ algorithm that aims to find the rightmost zero in a binary representation, flip it to a one, and flip any 1s to its right",coding,coding
+"The following is a python property-based test using the Hypothesis library:
+
+from hypothesis import given, strategies as st
+from hypothesis import assume
+
+expression = st.deferred(lambda: st.one_of(
+    st.integers(),
+    st.tuples(st.just('+'), expression, expression),
+    st.tuples(st.just('/'), expression, expression),
+))
+
+def div_subterms(e):
+    if isinstance(e, int):
+        return True
+    if e[0] == '/' and e[-1] == 0:
+        return False
+    return div_subterms(e[1]) and div_subterms(e[2])
+
+def evaluate(e):
+    if isinstance(e, int):
+        return e
+    elif e[0] == '+':
+        return evaluate(e[1]) + evaluate(e[2])
+    else:
+        assert e[0] == '/'
+    return evaluate(e[1]) // evaluate(e[2])
+
+@given(expression)
+def test(e):
+    assume(div_subterms(e))
+    evaluate(e)
+
+There is a bug in this program triggered by the input ('/', -492, ('/', -90, -268)). Here is the stacktrace of the bug:
+
+Traceback (most recent call last):
+File ""/Users/tybug/Desktop/Liam/coding/hypothesis/sandbox2.py"", line 34, in test
+evaluate(e)
+File ""/Users/tybug/Desktop/Liam/coding/hypothesis/sandbox2.py"", line 27, in evaluate
+return evaluate(e[1]) // evaluate(e[2])
+~~~~~~~~~~~~~~~^^~~~~~~~~~~~~~~~
+ZeroDivisionError: integer division or modulo by zero
+
+Please suggest a simpler and/or smaller input which would also trigger this bug. Do not give any explanation. Only state the simpler input.",coding,coding
+tell detailed step by step to build and setup a local chat assistant on my local computer under linux environment on top of GPT and then I could train them using documents that I provide,coding,coding
+Write C++ program to give specific Fibonacci number,coding,coding
+"carft a test suite testing append_alsh() with multiple str style alloc'd and array as sbyte string[]=""testing"";// d: add a / next a str if missing
+// i: str path
+// o: mstr with an added / 
+// o: str """" if path 0 sized
+// o: **FIXME** maybe NULL in case of allocation failure
+// c: function does copy path  so as to keep it safe
+// c: so user should realloc(0) result memory
+sbyte *append_slash(const sbyte *path)
+{
+	
+	if (path == NULL || path[0] == '\0') {
+		return NULL;
+	}
+	
+	size_t src_strsize = strlen(path);
+	if (src_strsize<=0){
+		return ret;
+	}	
+
+	
+	sbyte *ret=NULL;
+
+	// str len  abc\0   ==3
+	// yet as addresses:
+	//  sbyte 0=a 1=b  2=c   3=\0
+	// address 'len' is out o str range - str range being 0 > len-1    
+	// address 'len'   is supposed being \0 termination 
+	// address 'len-1'  would be content, / or something else
+	//if (strcmp(&path[src_strsize-1],""/"")==0){
+	if (path[src_strsize-1]=='/'){		
+		ret=calloc(src_strsize+1,sizeof(sbyte));
+		if(ret==NULL){
+			return(NULL);
+		}
+		//memset(ret, 0, sizeof(sbyte)*(src_strsize)+1 );
+		// copy path  so as to keep it safe
+		memcpy(ret, &path[0], src_strsize);
+	} else {
+		ret=calloc(src_strsize+1+1,sizeof(sbyte));
+		if(ret==NULL){
+			return(NULL);
+		}
+		//memset(ret, 0, sizeof(sbyte)*(src_strsize)+1+1 );
+		memcpy(ret, &path[0], src_strsize);
+		//sprintf(ret,""%s/"",path);
+		ret[src_strsize] = '/';
+		ret[src_strsize+1] = '\0';//  \0 termination 
+	}
+
+	return ret;
+}",coding,coding
+"-Draw the tesla cybertruck using matplotlib package and other tools that may be useful. Explain the basic shapes and essence of the car, look for some references of the Cybertruck shape and design, make the output of the car simple. Write down a plan first, be sure to keep track of where your placing shapes location, then output entire clean professional code in code compatible window.",coding,coding
+"write ,me code in js",coding,coding
+Tell me what is funny about python,coding,qa_other
+Write a rust function that takes in an integer x and a string and reverses the first x characters of the string,coding,coding
+"what is the opposite condition of the sql condition ""     ORD_BK_TYPE IN ('R') 
+     AND ORD_STATUS_FLAG IS NULL
+     AND ORD_PRODUCT IN ('FXF','FXC','FXFN')
+     AND  NVL(ORD_CANCEL_REASON,' ') IN ('NPV')
+     AND  ORD_TYPE = 'BKIN' 
+     AND NVL(SHORT_NAME,' ') ='SSBEARLY' """,coding,coding
+"If we divide human intelligence into three levels, what percentage do you think each level occupies",math,qa_other
+Can you do math.,math,qa_other
+"Please find me two whole, positive numbers that have a sum of 9 and a product of 20. Thanks",math,math
+"A table-tennis championship for $2^n$ players is organized as a knock-out tournament with $n$ rounds, the last round being the final. Two players are chosen at random. Calculate the probability that they meet: (a) in the first round, (b) in the final, (c) in any round.",math,math
+"You are a helpful chatbot who reads articles and answers questions using only the information from the context given. I will give you a paragraph and then ask you a question about it.
+
+**Paragraph**
+The Brexit withdrawal agreement, officially titled Agreement on the withdrawal of the United Kingdom of Great Britain and Northern Ireland from the European Union and the European Atomic Energy Community, is a treaty between the European Union (EU), Euratom, and the United Kingdom (UK), signed on 24 January 2020, setting the terms of the withdrawal of the UK from the EU and Euratom. The text of the treaty was published on 17 October 2019, and is a renegotiated version of an agreement published half a year earlier. The earlier version of the withdrawal agreement was rejected by the House of Commons on three occasions, leading to the resignation of Theresa May as Prime Minister and the appointment of Boris Johnson as the new prime minister on 24 July 2019.
+
+**Question**
+What happened to the original Brexit agreement?
+
+Answer only using the paragraph above.",math,qa_other
+"If a young individual who wear her glasses always, even for close work, age 19 is have -1.25D SE correction already, and is get unnecessary 1D base out prism  correction to both eyes to help distance vision by an opthamologist.Her next exam is scheduled 2 years from now. Can it cause esophoria in 2 years? Is 1 diopter base out prism for both eyes, can cause esophoria in long term? Does the individual can recognise  1D base out prism for both eyes? What will happen if the individual adapted to the correction over time, like 2 years, and her next exam try to be removed? Will she insist to it, and have to use it the rest of her life?What time is predicted to adapt to 1D base out prism  correction to both eyes, especially in a  young person?  Can it develop further myopia increase? If the 1D base out prism  correction to both eyes is a mistake, generaly how likely that esophoria is develop in 2 years, in a young person (Likely, quite likely, highly likely, very likely), if it possible in percent? I am fear, that my daughter prescribed with prisms unneseceraly. What does it mean, likely, quite likely, very likely, highly likely, certain, etc, particulary in her case, in percent?",math,qa_other
+"5+55+555+5555+55555-1725=
+
+Do everything step by step.
+Reflect on all your actions.
+All your actions can be distorted.
+Question everything.",math,math
+"1. 19 year old Emese who is thin (165cm 48kg.), have sudden shooting pain under, and below her kneecap, when straighten her leg fully, or climbing a bit more stairs will result constant pain, easily overuse her right knee.
+2. Orthopedic doctor made x-ray, no bone related issue, but  an ultrasonic exam will be only after one month.
+3. Indication from the doctor is: plica mediopatellaris, and condropathia.
+4. The doctor suggested to use a Patellar Tendon Strap brace, what she didnt feel supportive at all, so straps out of question, need alternatives.
+5. Emese feels better a simple elastic Compression Sleeve, She has no pain at the moment.
+6. Can a simple elastic Compression Sleeve  provide that kind of specified support what she need?
+7. What is the possibility of comlications, if She stay with the Compression Sleeve for the next month, and what could it be?
+8. How important, to use something else, than the compression sleeve,if she has no pain at the moment, and why?
+9. What is the best brace to her until the exam, to prevent complications? Custom brace is not an option.
+10. What type of brace would be the best until the exam, considering, that she is in school, and other daily activities, suggestion with percent? Patellar straps are not an option.
+11. Can you name some braces what could be the best, suggestion in percent?
+12. What brace you suggest more than others?
+13. Please name what brace would be the safest choice?
+14. How long she should use the brace typically?
+15. With example models, and suspected in percent please.
+16. If Bauerfiend Genutrain series is suggested, wich exact model from the series?",math,qa_other
+"I have a very rough draft of a speech I need to deliver to the congregation. 
+Style: Informative, interesting with everyday application.
+Here is the draft, rewrite it, make it coherent and logical, insert thoughts and sentences where needed:
+
+[First part of the talk before the video is finalised no need to change]
+
+[Here we watch a video about the overview of the book of Psalms; what is the content, who were the authors, songs, etc.]
+[After the video is played we will look into the key thoughts of the first 4 chapters as every week we dig deep in couple chapters of the bible]
+
+After overview of the of the Psalms let’s look into our weekly portion of the bible reading. There are lot of interesting thing you can find this week’s 4 chapters but the faithful and discreet slave chose this one: Psalms 2:2
+Let’s read together Psalms 2:2: “The kings of the earth take their stand and high officials gather together as one Against Jehovah and against his anointed one.”
+In some countries the elections are 4, 5 or 6 years. The alignment of these cycles happened to make 2024 the biggest election year of the history. Half of the world population votes this year. That includes the US, Russia, large part of Europe and the EU elections and even here we will have the local elections and political battle field getting ready for the January General elections. That will heavily influence the media and public discourse. So this choice of topic is very timely. 
+In the past at least the Kings acknowledged that they are appointed by god. But today God is out of the equation. World leaders are portrayed as the ones have the power to erase mankind from the face of the earth or end wars, world hunger migrations. 
+
+In Psalms 2:10-12 Jehovah ask everyone to use better judgement and take side accordingly.
+Our workbook asks the key question:  ‘Am I determined to remain neutral with regard to every aspect of this world’s political affairs, even if it could mean facing hardship?
+The second part of the question might seem irrelevant in this country. We enjoy are enjoy a great deal of freedom, but think for a minute if you would live in place like South Sudan or Russia neutrality can have real life repercussions. Here you just simply decide to stay neutral, should not be that hard. Nobody will burn up your house or beat you up should be an easy choice even if the circus will be ridiculous and entertaining.",math,writing
+"Q: The cafeteria had 23 apples If they used 20 to make lunch and bought 6 more, how many apples do they have?",math,math
+"Determine the tense of these sentences:
+The sun rises in the centre of the bay in summer.
+She played a lot of tennis when she was younger.
+You will do your homework before dinner.
+She is always coming to the office late.
+They were meeting secretly after school.
+I will be waiting for my results with baited breath.
+I have met a lot of clients in the past week.
+I had never been in the mountains before last January.
+By next June I will have gone to Spain.
+They have been discussing the problem for more than an hour.
+I had been playing tennis for five years before the injury.
+At Christmas, they'll have been living together for two years.
+How long will you have been studying when you graduate?
+How long had you been trying to contact Sarah before you gave up?
+How long have you been waiting?
+How many cities will you have visited by the time you retire?
+Had you worked there before you moved to London?
+Have you ever ridden a rollercoaster before?
+Will you be waiting for them at the hotel?
+What were you eating at lunchtime yesterday?
+Are you watching anything good these days?
+Will you have fun this Friday night?
+Who cooked last night's dinner for you?
+Do Rita and Angela live in Manchester?",math,qa_other
+"Let's look at this from multiple perspectives. Solve this math problem: 
+Indras has 6 letters in her name. Her sister's name has 4 more letters than half of the letters in Indras' name. How many letters are in Indras and her sister's names?",math,math
+"I have potatoes, leek, beetroot, and brussel sprouts at home. Plus the usual pantry items. Suggest 4 unusual things I can cook tonight that don't take more than 30 minutes.",math,qa_other
+Tell me a joke about formula 1,writing,writing
+write a horror story in only 2 sentences.,writing,writing
+tell me one dark joke,writing,writing
+please generate me a story,writing,writing
+please write a detailed blog post about the agile development process.  It should be targeted for people who are new to agile and looking to start a project using it.  Include a section comparing and contrasting it with the waterfall development process,writing,writing
+"Who wrote the lyrics ""Keep crying your heart out, we're all gonna die now""?",writing,qa_other
+Tell me a Sunday story about SK Sturm Graz,writing,writing
+Write a short email that you will work from home since showing flu symptoms,writing,writing
+Please write a story about a closeted crossdresser who spontaneously decides to get a belly piercing. Describe in detail what makes him make this impulsive decision. The belly piercing is easy to hide in male clothes and complements crop tops.,writing,writing
+Write a funny poem about a British man's love for a Pakistani-Canadian woman in the style of a caveman.,writing,writing
+generate an excuse letter for my boss,writing,writing
+"((Artificial intelligence-based service for profiling and assessing personality traits. For businesses, it helps managers identify talent, optimize teamwork, and develop employee development strategies. For individual users, it provides deep insights about themselves, recommendations for personal growth and overcoming limitations. The main advantage is self-discovery and improvement of both professional and personal qualities.))) Generate a description of the hypothesis of this service in Russian in a complete and understandable way that would be clear to the team of partners, clients and investors. your role is that of an experienced founder of an IT company.",writing,writing
+"Hi, we've been trying to reach you about your car's extended warranty",qa_other,qa_other
+try to descrive the habit of jawanese culture about marry and money,qa_other,qa_other
+"The success of SpaceX's Starlink has helped Taiwan-based electronics manufacturers to tap into the international satellite market. According to Taiwan-based suppliers, SpaceX is Taiwan's largest source of satellite-related orders. However, these suppliers indicated that SpaceX's domination in the sector as well as its ""Apple-like"" closed ecosystem will offer limited long-term benefits for Taiwan's supply chain, denting earlier hopes that the LEO satellite industry will replicate the successes seen in the notebook and smartphone sectors.
+
+As Starlink adapts an Apple-like strategy to develop hardware and software platforms on its own, without a competing Android-like ecosystem, the volume of orders can hardly scale up, according to Taiwan-based suppliers. Currently, satellite manufacturing and launching service together account for less than 10% of global satellite revenue, while ground equipment and satellite service respectively accounts for around 53% and 40% of the market. Taiwan-based suppliers believe that the two sectors have the greatest potential to attract more suppliers and grow, boosting adaption and giving rise to more application scenarios in the process - replicating the heydays of smartphone and notebook industries.
+
+Currently, Starlink operates around 4,000 satellites in orbit, while its planned constellation is made up of around 42,000 satellites. OneWeb, another satellite communication network operator, has approximately 400 satellites in orbit, planning to bring the number to 648. Project Kuiper, Amazon's own satellite communication network project, aims to launch its first satellite in 2024, eventually aiming for 3,236 satellites in the constellation. While OneWeb outsourced the manufacturing of its ground equipment, both SpaceX and Amazon opted to design and produce them in house. Amazon even designed a customized ASIC known as 'Prometheus'' to be used in Project Kuiper's terminals, satellites, and base stations.
+
+Given the latest progress in non-terrestrial network (NTN) standardization at 3GPP though, it is foreseeable that Taiwan-based suppliers will still have significant roles to play in the satellite communication industry as satellite connectivity on smartphones gains traction. Earlier this month, MediaTek just released a white paper exploring satellite and terrestrial network convergence, calling for 6G NTN to be natively considered from the beginning of the 6G physical/protocol layer design stage. In the paper, MediaTek identified four major new technology areas for 6G that can further",qa_other,qa_other
+BGP Type-5 routes are coming from where in my router?,qa_other,qa_other
+did VHS tape slip covers have an opening on one end or on the side?,qa_other,qa_other
+"My friend says I might overeat as a way to self soothe as a way to meet the underlying need of ""have feelings received"". What does this mean?",qa_other,qa_other
+Un jeu de football similaire à Beatmyteam,qa_other,qa_other
+Explain why this joke is antisemitic: Why did Donald Trump cross the road? The brothel was on the other side.,qa_other,qa_other
+Does the moon have moons?,qa_other,qa_other
+A ball and a sticker cost 1.10 $ in total. The ball costs 1$ more than the sticker. How much does the sticker cost?,qa_other,math
+What are some good investment strategies for dividend income?,qa_other,qa_other
+which show is this: woman who was missing suddenly appears and teaches some high scoolers dance moves to avoid scool shooting,qa_other,qa_other
